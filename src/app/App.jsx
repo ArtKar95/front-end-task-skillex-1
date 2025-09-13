@@ -1,20 +1,26 @@
-import { useGetProductsQuery } from "@/features/ProductsCatalog/productsAPI";
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { APP_ROUTES } from "./routes";
+
+const MainLayout = () => (
+  <div className="main-layout">
+    <div className="main-layout__header">Main Layout</div>
+    <Outlet />
+  </div>
+);
 
 function App() {
-
-   const { data, error, isLoading } = useGetProductsQuery();
-   console.log('isLoading', isLoading)
-   console.log('error', error)
-   console.log('data', data)
-
-  if (isLoading) return <p>Loading products...</p>;
-  if (error) return <p>Failed to load products.</p>;
-
   return (
-      <div className="app">
-        APP Component
-      </div>
-  )
+    <BrowserRouter>
+        <Routes>
+          <Route element={<MainLayout />}>
+            {APP_ROUTES.map(({ path, element }, key) => (
+              <Route key={key} path={path} element={element} />
+            ))}
+          </Route>
+          <Route path="*" element={<Navigate to="/not-found" />} />
+        </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
