@@ -1,7 +1,7 @@
 import React from 'react';
 
 const HomePage = () => {
-  return <div style={{ marginTop: '50px' }}>Home Page Test</div>;
+  return <div>Home Page</div>;
 };
 
 export default HomePage;
