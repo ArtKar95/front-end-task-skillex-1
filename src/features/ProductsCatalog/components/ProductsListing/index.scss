@@ -1,0 +1,38 @@
+.products {
+  background: linear-gradient(135deg, $bg-light-start 0%, $bg-light-end 100%);
+  padding: rem(32) rem(16);
+
+  &__grid {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(rem(280), 1fr));
+    gap: rem(32);
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    padding: rem(24);
+
+    &__grid {
+      gap: rem(24);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: rem(20);
+
+    &__grid {
+      grid-template-columns: repeat(auto-fill, minmax(rem(240), 1fr));
+      gap: rem(20);
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: rem(16);
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: rem(16);
+    }
+  }
+}

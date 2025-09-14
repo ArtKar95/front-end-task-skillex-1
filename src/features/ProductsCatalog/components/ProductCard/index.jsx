@@ -1,5 +1,5 @@
-import ReactStars from 'react-stars';
-import './ProductCard.scss';
+import { Rating } from 'react-simple-star-rating';
+import './index.scss';
 
 const ProductCard = ({ product }) => {
   return (
@@ -24,14 +24,12 @@ const ProductCard = ({ product }) => {
         <p className='product-card__info__category'>{product.category}</p>
 
         <div className='product-card__info__rating'>
-          <ReactStars
-            count={5}
-            value={product.rating}
-            size={24}
-            color2='#fbbf24'
-            edit={false}
+          <Rating
+            readonly
+            initialValue={product.rating}
+            size={20}
+            allowFraction={true}
           />
-
           <span className='product-card__info__rating__value'>
             ({product.rating})
           </span>

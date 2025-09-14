@@ -4,8 +4,7 @@
   align-items: center;
 }
 
-
-// Box shadow
+//! Box shadow
 @mixin card-shadow($hover: false) {
   @if $hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -14,7 +13,7 @@
   }
 }
 
-// Transition
+//! Transition
 @mixin transition($properties: all, $duration: 0.3s, $timing: ease) {
   transition: $properties $duration $timing;
 }
