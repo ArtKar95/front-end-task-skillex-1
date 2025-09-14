@@ -6,7 +6,8 @@
     "brand": "Brand A",
     "price": 99.99,
     "rating": 4.5,
-    "imageUrl": "https://example.com/images/headphones.jpg"
+    "imageUrl": "https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "popularity": 8.5
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "brand": "Brand B",
     "price": 49.99,
     "rating": 4.0,
-    "imageUrl": "https://example.com/images/speaker.jpg"
+    "imageUrl": "https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "popularity": 7.2
   },
   {
     "id": 3,
@@ -23,8 +25,9 @@
     "category": "Footwear",
     "brand": "Brand C",
     "price": 59.99,
-    "rating": 4.2,
-    "imageUrl": "https://example.com/images/shoes.jpg"
+    "rating": 4.6,
+    "imageUrl": "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "popularity": 9.1
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "brand": "Brand D",
     "price": 499.99,
     "rating": 4.8,
-    "imageUrl": "https://example.com/images/smartphone.jpg"
+    "imageUrl": "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "popularity": 9.8
   },
   {
     "id": 5,
@@ -42,6 +46,77 @@
     "brand": "Brand E",
     "price": 199.99,
     "rating": 4.7,
-    "imageUrl": "https://example.com/images/jacket.jpg"
+    "imageUrl": "https://images.pexels.com/photos/1124465/pexels-photo-1124465.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "popularity": 6.8
+  },
+  {
+    "id": 6,
+    "name": "Gaming Mouse",
+    "category": "Electronics",
+    "brand": "Brand F",
+    "price": 79.99,
+    "rating": 4.6,
+    "imageUrl": "https://images.pexels.com/photos/2115256/pexels-photo-2115256.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "popularity": 8.0
+  },
+  {
+    "id": 7,
+    "name": "Cotton T-Shirt",
+    "category": "Clothing",
+    "brand": "Brand G",
+    "price": 19.99,
+    "rating": 3.8,
+    "imageUrl": "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "popularity": 5.5
+  },
+  {
+    "id": 8,
+    "name": "Laptop Stand",
+    "category": "Accessories",
+    "brand": "Brand H",
+    "price": 39.99,
+    "rating": 3.6,
+    "imageUrl": "https://images.pexels.com/photos/4482900/pexels-photo-4482900.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "popularity": 7.0
+  },
+  {
+    "id": 9,
+    "name": "Backpack",
+    "category": "Accessories",
+    "brand": "Brand I",
+    "price": 89.99,
+    "rating": 4.9,
+    "imageUrl": "https://images.pexels.com/photos/2905238/pexels-photo-2905238.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "popularity": 8.3
+  },
+  {
+    "id": 10,
+    "name": "Wireless Charger",
+    "category": "Electronics",
+    "brand": "Brand J",
+    "price": 29.99,
+    "rating": 1.0,
+    "imageUrl": "https://images.pexels.com/photos/4110003/pexels-photo-4110003.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "popularity": 6.5
+  },
+  {
+    "id": 11,
+    "name": "Casual Sneakers",
+    "category": "Footwear",
+    "brand": "Brand K",
+    "price": 69.99,
+    "rating": 2.5,
+    "imageUrl": "https://images.pexels.com/photos/2529157/pexels-photo-2529157.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "popularity": 7.8
+  },
+  {
+    "id": 12,
+    "name": "Denim Jeans",
+    "category": "Clothing",
+    "brand": "Brand L",
+    "price": 89.99,
+    "rating": 4.5,
+    "imageUrl": "https://images.pexels.com/photos/1598507/pexels-photo-1598507.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "popularity": 8.7
   }
 ]

@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -13,10 +12,10 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-          @import "@/styles/variables.scss";
-          @import "@/styles/functions.scss";
-          @import "@/styles/mixins.scss";
-        `,
+        @use "@/styles/variables" as *;
+        @use "@/styles/functions" as *;
+        @use "@/styles/mixins" as *;
+      `,
       },
     },
   },
