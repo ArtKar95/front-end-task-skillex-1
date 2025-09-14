@@ -1,12 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import MainLayout from "@/layouts/MainLayout";
 import { APP_ROUTES } from "./routes";
 
-const MainLayout = () => (
-  <div className="main-layout">
-    <div className="main-layout__header">Main Layout</div>
-    <Outlet />
-  </div>
-);
 
 function App() {
   return (

@@ -1,0 +1,33 @@
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, $bg-light-start 0%, $bg-light-end 100%);
+
+  &__header {
+    background: linear-gradient(
+      135deg,
+      $header-gradient-start 0%,
+      $header-gradient-end 100%
+    );
+    color: $white;
+    padding: rem(20) 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    h1 {
+      font-size: rem(30);
+      font-weight: $font-weight-bold;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    padding: rem(10);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
