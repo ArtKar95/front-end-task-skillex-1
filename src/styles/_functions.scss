@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 @function rem($px-value) {
-  @return #{$px-value / 10}rem;
+  @return #{math.div($px-value, 10)}rem;
 }

@@ -1,7 +1,7 @@
-import React from 'react';
+import ProductsCatalog from '@/features/ProductsCatalog';
 
 const HomePage = () => {
-  return <div>Home Page</div>;
+  return <ProductsCatalog />;
 };
 
 export default HomePage;
