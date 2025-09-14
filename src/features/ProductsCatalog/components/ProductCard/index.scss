@@ -7,7 +7,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  max-width: rem(400);
+  width: 100%;
+  max-width: rem(480);
 
   &:hover {
     transform: translateY(-rem(4));
@@ -95,7 +96,6 @@
       margin-bottom: rem(12);
 
       &__value {
-        padding-top: rem(3);
         color: $gray-500;
         font-size: rem(14);
       }
@@ -133,18 +133,6 @@
       &:active {
         transform: translateY(0);
       }
-    }
-  }
-
-  @media (max-width: 768px) {
-    &__image-container {
-      height: rem(180);
-    }
-    &__info {
-      padding: rem(16);
-    }
-    &__info__name {
-      font-size: rem(16);
     }
   }
 }
