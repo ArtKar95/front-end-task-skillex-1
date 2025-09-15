@@ -10,6 +10,34 @@
     align-items: center;
   }
 
+  &__load-more {
+    display: flex;
+    justify-content: center;
+    margin-top: rem(24);
+
+    & > button {
+      background: $blue-500;
+      color: $white;
+      border: none;
+      padding: rem(10) rem(16);
+      border-radius: $radius-md;
+      font-weight: $fw-semibold;
+      cursor: pointer;
+      @include transition(background-color, 0.2s);
+
+      &:hover {
+        background: $blue-700;
+      }
+    }
+  }
+
+  &__no-more {
+    text-align: center;
+    margin-top: rem(16);
+    color: $gray-500;
+    font-weight: $fw-medium;
+  }
+
   @media (max-width: 1024px) {
     padding: rem(24);
 
