@@ -1,0 +1,95 @@
+.filter {
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    visibility: hidden;
+    @include transition(background, 0.3s, ease);
+  }
+
+  &__panel {
+    transform: none;
+    position: static;
+    height: fit-content;
+    width: fit-content;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    @include flex-center;
+    justify-content: space-between;
+    padding: rem(16);
+    border-bottom: 1px solid $gray-300;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: rem(18);
+    font-weight: $fw-semibold;
+  }
+
+  &__close-btn {
+    display: none;
+
+    @media (max-width: 767px) {
+      display: block;
+      background: none;
+      border: none;
+      font-size: rem(20);
+      cursor: pointer;
+    }
+  }
+
+  &__content {
+    padding: rem(10);
+    overflow-y: auto;
+  }
+
+  @media (max-width: 767px) {
+    &__panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: linear-gradient(
+        135deg,
+        $bg-light-start 0%,
+        $bg-light-end 100%
+      );
+      transform: translateX(-100%);
+      @include transition(transform, 0.3s, ease);
+      z-index: 10;
+      width: 280px;
+      height: 100vh;
+      background: linear-gradient(
+        135deg,
+        $bg-light-start 0%,
+        $bg-light-end 100%
+      );
+    }
+  }
+
+  &--open {
+    .filter__backdrop {
+      background: rgba(0, 0, 0, 0.45);
+      opacity: 1;
+      visibility: visible;
+      z-index: 10;
+      @include card-shadow(true);
+
+      @media (max-width: 767px) {
+        display: block;
+      }
+    }
+
+    .filter__panel {
+      transform: none;
+
+      @media (max-width: 767px) {
+        transform: translateX(0);
+        display: flex;
+        position: fixed;
+      }
+    }
+  }
+}

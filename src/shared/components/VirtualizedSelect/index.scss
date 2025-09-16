@@ -1,0 +1,133 @@
+.virtual-select {
+  font-family: 'Inter', system-ui, sans-serif;
+  position: relative;
+  max-width: 100%;
+  min-width: rem(200);
+
+  &__button {
+    width: 100%;
+    padding: rem(8);
+    border-radius: $radius-md;
+    border: 1px solid $gray-300;
+    background: $white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: rem(14);
+    font-weight: $fw-medium;
+    color: $gray-700;
+    @include transition(background, 0.2s, ease);
+
+    &:hover {
+      background: $gray-100;
+    }
+  }
+
+  &__button-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__button-icon,
+  &__button-clear {
+    margin-left: rem(8);
+    font-size: rem(20);
+    color: $gray-500;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &__dropdown {
+    border-radius: $radius-md;
+    background: $white;
+    border: 1px solid $gray-200;
+    @include card-shadow();
+    overflow: hidden;
+    z-index: 1000;
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    padding: rem(6) rem(8);
+    border-bottom: 1px solid $gray-200;
+
+    & input {
+      width: 100%;
+      padding: rem(6) rem(8);
+      border-radius: $radius-sm;
+      border: 1px solid $gray-300;
+      outline: none;
+      font-size: rem(14);
+      color: $gray-800;
+      @include transition(border-color 0.2s ease, box-shadow 0.2s ease);
+
+      &:focus {
+        border-color: $blue-500;
+        box-shadow: 0 0 0 rem(2) rgba($blue-500, 0.2);
+      }
+    }
+  }
+
+  &__list {
+    overflow-y: auto;
+    position: relative;
+    background: $white;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  &__slice {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  &__item {
+    height: rem(40);
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+    padding: 0 rem(12);
+    cursor: pointer;
+    border-bottom: 1px solid $gray-100;
+    background: $white;
+    @include transition(background 0.15s ease);
+
+    &:hover {
+      background: $gray-100;
+    }
+
+    &.is-selected {
+      background: rgba($blue-500, 0.08);
+
+      &:hover {
+        background: rgba($blue-500, 0.15);
+      }
+    }
+  }
+
+  &__checkbox {
+    pointer-events: none;
+    accent-color: $blue-500;
+  }
+
+  &__label {
+    font-size: rem(14);
+    color: $gray-700;
+    font-weight: $fw-regular;
+  }
+
+  &__no-options {
+    padding: rem(10);
+    text-align: center;
+    color: $gray-500;
+  }
+}
