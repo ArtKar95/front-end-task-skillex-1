@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: linear-gradient(135deg, $bg-light-start 0%, $bg-light-end 100%);
 
   &__header {
     background: linear-gradient(
@@ -11,7 +10,7 @@
       $header-gradient-end 100%
     );
     color: $white;
-    padding: rem(20) 0;
+    padding: rem(16) 0;
     text-align: center;
     position: relative;
     overflow: hidden;

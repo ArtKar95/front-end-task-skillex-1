@@ -1,0 +1,37 @@
+.rating-filter {
+  @include card-shadow();
+  background: $white;
+  border-radius: $radius-md;
+  padding: rem(16);
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+
+  &__label {
+    font-weight: $fw-semibold;
+    color: $gray-700;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: rem(4);
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+    cursor: pointer;
+    color: $yellow-400;
+
+    input[type='radio'] {
+      cursor: pointer;
+    }
+
+    &__text {
+      font-size: rem(14);
+      color: $gray-700;
+    }
+  }
+}

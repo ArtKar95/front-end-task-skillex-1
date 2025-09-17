@@ -1,6 +1,6 @@
 .products {
-  background: linear-gradient(135deg, $bg-light-start 0%, $bg-light-end 100%);
-  padding: rem(32) rem(16);
+  background: $white;
+  padding: rem(16);
 
   &__grid {
     margin: 0 auto;

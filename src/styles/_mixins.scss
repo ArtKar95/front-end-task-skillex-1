@@ -17,3 +17,11 @@
 @mixin transition($properties: all, $duration: 0.3s, $timing: ease) {
   transition: $properties $duration $timing;
 }
+
+@mixin hide-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}

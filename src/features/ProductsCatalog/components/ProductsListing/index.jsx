@@ -4,7 +4,7 @@ import ProductCard from '../ProductCard';
 import ProductsSkeleton from '../ProductsSceleton';
 import './index.scss';
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 24;
 
 const ProductsListing = () => {
   //! Of cours better to do with real API query params and pagination and filtring and sorting
