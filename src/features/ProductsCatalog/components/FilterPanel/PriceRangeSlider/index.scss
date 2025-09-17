@@ -1,0 +1,75 @@
+.price-range {
+  @include card-shadow();
+  background: $white;
+  border-radius: $radius-md;
+  padding: rem(16);
+  display: flex;
+  flex-direction: column;
+  gap: rem(12);
+
+  &__label {
+    font-weight: 600;
+    margin-bottom: rem(8);
+    color: $gray-700;
+  }
+
+  &__inputs {
+    position: relative;
+    height: rem(6);
+    border-radius: $radius-md;
+    background: linear-gradient(
+      to right,
+      $gray-300 var(--minPercent, 0%),
+      $blue-500 var(--minPercent, 0%),
+      $blue-500 var(--maxPercent, 100%),
+      $gray-300 var(--maxPercent, 100%)
+    );
+
+    input[type='range'] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: rem(6);
+      background: transparent;
+      outline: none;
+      position: absolute;
+      left: -2px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+
+      &.price-range__slider--min {
+        z-index: 2;
+      }
+      &.price-range__slider--max {
+        z-index: 1;
+      }
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: rem(16);
+        height: rem(16);
+        border-radius: 50%;
+        background: $blue-500;
+        cursor: pointer;
+        pointer-events: all;
+        @include transition();
+      }
+    }
+  }
+
+  &__values {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    color: $gray-300;
+    padding-top: rem(8);
+
+    span {
+      background: $green-500;
+      color: $white;
+      padding: rem(4) rem(8);
+      border-radius: $radius-md;
+    }
+  }
+}

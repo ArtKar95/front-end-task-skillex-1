@@ -56,6 +56,8 @@
     margin-top: 16px;
     background: linear-gradient(135deg, $bg-light-start 0%, $bg-light-end 100%);
     display: block;
+    @include hide-scrollbar;
+
     @media (max-width: 767px) {
       width: 0px;
     }
@@ -65,11 +67,6 @@
     flex: 1;
     overflow-y: auto;
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    @include hide-scrollbar;
   }
 }

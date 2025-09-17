@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useCallback } from 'react';
 import VirtualizedSelect from '@/shared/components/VirtualizedSelect';
+import DebouncedInput from '@/shared/components/DebouncesInput';
 import './index.scss';
+import PriceRangeSlider from './PriceRangeSlider';
+import RatingFilter from './RatingFilter';
 
 const options = [
   'Apple',
@@ -37,12 +40,16 @@ const FilterPanel = ({ isOpen, onClose }) => {
           </button>
         </div>
         <div className='filter__content'>
+          <DebouncedInput
+            onChange={(value) => console.log(value, 'search value')}
+            placeholder='Search products...'
+          />
           <VirtualizedSelect
             data={options}
             multiple
             selected={selectedItems}
             onChange={handleMultiChange}
-            placeholder='Select fruits...'
+            placeholder='Categories'
             height={200}
             itemHeight={40}
           />
@@ -50,10 +57,16 @@ const FilterPanel = ({ isOpen, onClose }) => {
             data={options}
             selected={selectedItem}
             onChange={handleSingleChange}
-            placeholder='Select single select...'
+            placeholder='Brands'
             height={200}
             itemHeight={40}
           />
+
+          <PriceRangeSlider
+            onChange={(value) => console.log(value, 'price range')}
+          />
+
+          <RatingFilter onChange={(value) => console.log(value, 'rating')} />
         </div>
       </aside>
     </div>

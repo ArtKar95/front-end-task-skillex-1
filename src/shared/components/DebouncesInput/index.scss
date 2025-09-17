@@ -1,0 +1,17 @@
+.debounced-input {
+  width: 100%;
+  & > input {
+    width: inherit;
+    box-sizing: border-box;
+    padding: rem(10) rem(15);
+    border: 1px solid $gray-300;
+    border-radius: $radius-md;
+    font-weight: $fw-regular;
+    @include transition();
+    &:focus {
+      outline: none;
+      border-color: $blue-500;
+      box-shadow: 0 0 0 2px rgba($blue-500, 0.2);
+    }
+  }
+}

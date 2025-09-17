@@ -75,12 +75,7 @@
     overflow-y: auto;
     position: relative;
     background: $white;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    @include hide-scrollbar;
   }
 
   &__slice {
