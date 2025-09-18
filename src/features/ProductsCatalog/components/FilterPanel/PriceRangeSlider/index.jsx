@@ -1,32 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import useDebounce from '@/shared/hooks/useDebounce';
+import { useState, useEffect, useMemo } from 'react';
+import useDebouncedCallback from '@/shared/hooks/useDebouncedCallback';
+import { useGetPriceRangeQuery } from '@/features/ProductsCatalog/productsAPI';
 import './index.scss';
 
-const PriceRangeSlider = ({ min = 0, max = 1000, onChange }) => {
-  const [range, setRange] = useState({ minValue: min, maxValue: max });
+const PriceRangeSlider = ({ defaultRange, onChange }) => {
+  const { data: priceRange = null } = useGetPriceRangeQuery();
+  const { min, max } = priceRange || {};
 
-  const debouncedRange = useDebounce(range, 300);
+  const [range, setRange] = useState(defaultRange || { min: 0, max: 0 });
 
   useEffect(() => {
-    if (onChange) onChange(debouncedRange);
-  }, [debouncedRange, onChange]);
+    if (priceRange && !defaultRange) {
+      setRange({ min: priceRange.min, max: priceRange.max });
+    }
+  }, [priceRange, defaultRange]);
 
-  const minPercent = ((range.minValue - min) / (max - min)) * 100;
-  const maxPercent = ((range.maxValue - min) / (max - min)) * 100;
+  const debouncedOnChange = useDebouncedCallback(onChange, 300);
 
   const handleMinChange = (e) => {
-    const value = Math.min(Number(e.target.value), range.maxValue - 1);
-    setRange({ ...range, minValue: value });
+    const value = Math.min(Number(e.target.value), range.max - 1);
+    const updated = { ...range, min: value };
+    setRange(updated);
+    debouncedOnChange(updated);
   };
 
   const handleMaxChange = (e) => {
-    const value = Math.max(Number(e.target.value), range.minValue + 1);
-    setRange({ ...range, maxValue: value });
+    const value = Math.max(Number(e.target.value), range.min + 1);
+    const updated = { ...range, max: value };
+    setRange(updated);
+    debouncedOnChange(updated);
   };
+
+  const minPercent = useMemo(
+    () => ((range.min - min) / (max - min)) * 100,
+    [range.min, min, max]
+  );
+
+  const maxPercent = useMemo(
+    () => ((range.max - min) / (max - min)) * 100,
+    [range.max, min, max]
+  );
+
+  if (!priceRange) return null;
 
   return (
     <div className='price-range'>
       <label className='price-range__label'>Price Range</label>
+
       <div
         className='price-range__inputs'
         style={{
@@ -38,7 +58,7 @@ const PriceRangeSlider = ({ min = 0, max = 1000, onChange }) => {
           type='range'
           min={min}
           max={max}
-          value={range.minValue}
+          value={range.min}
           onChange={handleMinChange}
           className='price-range__slider price-range__slider--min'
         />
@@ -46,14 +66,15 @@ const PriceRangeSlider = ({ min = 0, max = 1000, onChange }) => {
           type='range'
           min={min}
           max={max}
-          value={range.maxValue}
+          value={range.max}
           onChange={handleMaxChange}
           className='price-range__slider price-range__slider--max'
         />
       </div>
+
       <div className='price-range__values'>
-        <span>${range.minValue}</span>
-        <span>${range.maxValue}</span>
+        <span>${range.min}</span>
+        <span>${range.max}</span>
       </div>
     </div>
   );

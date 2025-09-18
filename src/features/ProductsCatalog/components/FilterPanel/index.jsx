@@ -1,30 +1,25 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import VirtualizedSelect from '@/shared/components/VirtualizedSelect';
 import DebouncedInput from '@/shared/components/DebouncesInput';
-import './index.scss';
+import { useGetBrandsQuery, useGetCategoriesQuery } from '../../productsAPI';
 import PriceRangeSlider from './PriceRangeSlider';
 import RatingFilter from './RatingFilter';
+import './index.scss';
 
-const options = [
-  'Apple',
-  'Banana',
-  'Orange',
-  'Grape',
-  'Mango',
-  'Pineapple',
-  'Strawberry',
-  'Blueberry',
-  'Watermelon',
-  'Kiwi',
-];
+const FilterPanel = ({ filters, setFilters, isOpen, onClose }) => {
+  const { data: categoriesData = [] } = useGetCategoriesQuery();
+  const { data: brandsData = [] } = useGetBrandsQuery();
+  const { search, categories, brands, priceRange, rating } = filters || {};
 
-const FilterPanel = ({ isOpen, onClose }) => {
-  const [selectedItems, setSelectedItems] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null);
-
-  const handleMultiChange = useCallback(setSelectedItems, []);
-  const handleSingleChange = useCallback(setSelectedItem, []);
+  const handleFilterChange = useCallback(
+    (key, value) => {
+      setFilters((prev) => ({
+        ...prev,
+        [key]: value,
+      }));
+    },
+    [setFilters]
+  );
 
   return (
     <div
@@ -39,34 +34,43 @@ const FilterPanel = ({ isOpen, onClose }) => {
             ✕
           </button>
         </div>
+
         <div className='filter__content'>
           <DebouncedInput
-            onChange={(value) => console.log(value, 'search value')}
+            defaultValue={search}
+            onChange={(value) => handleFilterChange('search', value)}
             placeholder='Search products...'
           />
+
           <VirtualizedSelect
-            data={options}
+            data={categoriesData}
             multiple
-            selected={selectedItems}
-            onChange={handleMultiChange}
+            selected={categories || []}
+            onChange={(value) => handleFilterChange('categories', value)}
             placeholder='Categories'
             height={200}
             itemHeight={40}
           />
+
           <VirtualizedSelect
-            data={options}
-            selected={selectedItem}
-            onChange={handleSingleChange}
+            data={brandsData}
+            multiple
+            selected={brands || []}
+            onChange={(value) => handleFilterChange('brands', value)}
             placeholder='Brands'
             height={200}
             itemHeight={40}
           />
 
           <PriceRangeSlider
-            onChange={(value) => console.log(value, 'price range')}
+            defaultRange={priceRange}
+            onChange={(value) => handleFilterChange('priceRange', value)}
           />
 
-          <RatingFilter onChange={(value) => console.log(value, 'rating')} />
+          <RatingFilter
+            selected={rating || null}
+            onChange={(value) => handleFilterChange('rating', value)}
+          />
         </div>
       </aside>
     </div>
