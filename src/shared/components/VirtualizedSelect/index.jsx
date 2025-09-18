@@ -37,6 +37,7 @@ const VirtualizedSelect = ({
   }, []);
 
   useEffect(() => {
+    if (!isOpen) setFilter('');
     if (!isOpen || !buttonRef.current) return;
     const rect = buttonRef.current.getBoundingClientRect();
     setDropdownPos({

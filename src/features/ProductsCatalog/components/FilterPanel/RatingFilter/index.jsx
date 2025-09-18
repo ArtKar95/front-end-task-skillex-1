@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './index.scss';
 
 const RATING_OPTIONS = [
@@ -10,8 +10,8 @@ const RATING_OPTIONS = [
   { value: 1, label: '★☆☆☆☆' },
 ];
 
-const RatingFilter = ({ onChange }) => {
-  const [selected, setSelected] = useState('');
+const RatingFilter = ({ rating, onChange }) => {
+  const [selected, setSelected] = useState(rating || '');
 
   const handleChange = (e) => {
     const value = e.target.value;

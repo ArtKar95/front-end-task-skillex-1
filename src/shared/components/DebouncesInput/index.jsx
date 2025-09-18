@@ -1,15 +1,21 @@
-import { useState, useEffect } from 'react';
-import useDebounce from '@/shared/hooks/useDebounce';
+import { useState } from 'react';
+import useDebouncedCallback from '@/shared/hooks/useDebouncedCallback';
 import './index.scss';
 
-const DebouncedInput = ({ onChange, placeholder = 'Search...' }) => {
-  const [value, setValue] = useState('');
+const DebouncedInput = ({
+  defaultValue = '',
+  onChange,
+  placeholder = 'Search...',
+}) => {
+  const [value, setValue] = useState(defaultValue);
 
-  const debouncedSearch = useDebounce(value, 500);
+  const debouncedOnChange = useDebouncedCallback(onChange, 500);
 
-  useEffect(() => {
-    onChange(debouncedSearch);
-  }, [debouncedSearch, onChange]);
+  const handleChange = (e) => {
+    const val = e.target.value;
+    setValue(val);
+    debouncedOnChange(val);
+  };
 
   return (
     <div className='debounced-input'>
@@ -17,7 +23,7 @@ const DebouncedInput = ({ onChange, placeholder = 'Search...' }) => {
         type='text'
         placeholder={placeholder}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
       />
     </div>
   );
