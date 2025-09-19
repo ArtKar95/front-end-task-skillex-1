@@ -1,8 +1,7 @@
-import { useState } from 'react';
 import './index.scss';
 
 const RATING_OPTIONS = [
-  { value: '', label: 'Any' },
+  { value: -1, label: 'Any' },
   { value: 5, label: '★★★★★' },
   { value: 4, label: '★★★★☆' },
   { value: 3, label: '★★★☆☆' },
@@ -11,11 +10,8 @@ const RATING_OPTIONS = [
 ];
 
 const RatingFilter = ({ rating, onChange }) => {
-  const [selected, setSelected] = useState(rating || '');
-
   const handleChange = (e) => {
     const value = e.target.value;
-    setSelected(value);
     if (onChange) onChange(value ? Number(value) : null);
   };
 
@@ -29,7 +25,7 @@ const RatingFilter = ({ rating, onChange }) => {
               type='radio'
               name='rating'
               value={opt.value}
-              checked={selected === String(opt.value)}
+              checked={rating === opt.value}
               onChange={handleChange}
             />
             <span className='rating-filter__text'>{opt.label}</span>

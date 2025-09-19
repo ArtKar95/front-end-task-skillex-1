@@ -7,7 +7,7 @@ import PriceRangeSlider from './PriceRangeSlider';
 import RatingFilter from './RatingFilter';
 import './index.scss';
 
-const FilterPanel = ({ filters, setFilters, isOpen, onClose }) => {
+const FilterPanel = ({ filters, handleFiltersChange, isOpen, onClose }) => {
   const { showToast } = useToast();
   const { data: categoriesData = [], error: categoriesError } =
     useGetCategoriesQuery();
@@ -31,14 +31,14 @@ const FilterPanel = ({ filters, setFilters, isOpen, onClose }) => {
     }
   }, [categoriesError, brandsError, showToast]);
 
-  const handleFilterChange = useCallback(
+  const onFiltersChange = useCallback(
     (key, value) => {
-      setFilters((prev) => ({
-        ...prev,
+      handleFiltersChange({
+        ...filters,
         [key]: value,
-      }));
+      });
     },
-    [setFilters]
+    [handleFiltersChange, filters]
   );
 
   return (
@@ -58,7 +58,7 @@ const FilterPanel = ({ filters, setFilters, isOpen, onClose }) => {
         <div className='filter__content'>
           <DebouncedInput
             defaultValue={search}
-            onChange={(value) => handleFilterChange('search', value)}
+            onChange={(value) => onFiltersChange('search', value)}
             placeholder='Search products...'
           />
 
@@ -66,7 +66,7 @@ const FilterPanel = ({ filters, setFilters, isOpen, onClose }) => {
             data={categoriesData}
             multiple
             selected={categories || []}
-            onChange={(value) => handleFilterChange('categories', value)}
+            onChange={(value) => onFiltersChange('categories', value)}
             placeholder='Categories'
             height={200}
             itemHeight={40}
@@ -76,7 +76,7 @@ const FilterPanel = ({ filters, setFilters, isOpen, onClose }) => {
             data={brandsData}
             multiple
             selected={brands || []}
-            onChange={(value) => handleFilterChange('brands', value)}
+            onChange={(value) => onFiltersChange('brands', value)}
             placeholder='Brands'
             height={200}
             itemHeight={40}
@@ -84,12 +84,12 @@ const FilterPanel = ({ filters, setFilters, isOpen, onClose }) => {
 
           <PriceRangeSlider
             defaultRange={priceRange}
-            onChange={(value) => handleFilterChange('priceRange', value)}
+            onChange={(value) => onFiltersChange('priceRange', value)}
           />
 
           <RatingFilter
-            selected={rating || null}
-            onChange={(value) => handleFilterChange('rating', value)}
+            rating={rating}
+            onChange={(value) => onFiltersChange('rating', value)}
           />
         </div>
       </aside>

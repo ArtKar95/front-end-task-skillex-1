@@ -7,7 +7,7 @@ const ProductsListing = ({
   products,
   isLoading,
   isFetching,
-  onLoadMore,
+  handleLoadMore,
   total,
 }) => {
   const hasMore = useMemo(() => products.length < total, [products, total]);
@@ -34,7 +34,7 @@ const ProductsListing = ({
         </div>
       ) : (
         <div className='products__load-more'>
-          <button onClick={onLoadMore} disabled={isFetching}>
+          <button onClick={handleLoadMore} disabled={isFetching}>
             {isFetching ? 'Loading...' : 'Load More'}
           </button>
         </div>
