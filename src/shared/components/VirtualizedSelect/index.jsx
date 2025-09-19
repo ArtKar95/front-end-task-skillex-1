@@ -72,7 +72,7 @@ const VirtualizedSelect = ({
   const clearAll = () => onChange?.(multiple ? [] : null) || setIsOpen(false);
 
   const buttonLabel = multiple
-    ? !selected.length
+    ? !selected?.length
       ? placeholder
       : selected.length <= 3
       ? selected.join(', ')
@@ -104,7 +104,7 @@ const VirtualizedSelect = ({
         }
       >
         <span className='virtual-select__button-label'>{buttonLabel}</span>
-        {(multiple ? selected.length : selected) ? (
+        {(multiple ? selected?.length : selected) ? (
           <span className='virtual-select__button-clear' onClick={clearAll}>
             ×
           </span>
@@ -146,7 +146,7 @@ const VirtualizedSelect = ({
                 >
                   {visibleSlice.map((item, idx) => {
                     const isSelected = multiple
-                      ? selected.includes(item)
+                      ? selected?.includes(item)
                       : selected === item;
                     return (
                       <div

@@ -53,7 +53,9 @@ const ProductsCatalog = () => {
     <div className='catalog'>
       <header className='catalog__header'>
         <div className='catalog__header__results'>
-          <p>{total} products found</p>
+          <p data-testid='products-count'>
+            {total} {total <= 1 ? 'product' : 'products'} found
+          </p>
         </div>
         <SortOptions
           sortOption={sortOption}
