@@ -36,3 +36,21 @@ export const filterProducts = (items = [], filters = {}) => {
     );
   });
 };
+
+export const sortProducts = (products = [], sortOption = 'name-asc') => {
+  const [key, order] = sortOption.split('-');
+
+  const compare = (a, b) => {
+    const valA = a[key];
+    const valB = b[key];
+
+    if (key === 'name')
+      return order === 'asc'
+        ? valA.localeCompare(valB)
+        : valB.localeCompare(valA);
+
+    return order === 'asc' ? valA - valB : valB - valA;
+  };
+
+  return products.sort(compare);
+};

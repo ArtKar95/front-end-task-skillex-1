@@ -1,22 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useGetProductsQuery } from '@/features/ProductsCatalog/productsAPI';
+import { useToast } from '@/shared/hooks/useToast';
 import ProductsListing from './components/ProductsListing';
 import FilterPanel from './components/FilterPanel';
-import { INITIAL_FILTERS, PAGE_SIZE } from './constants';
+import { INITIAL_FILTERS, INITIAL_SORT_OPTION, PAGE_SIZE } from './constants';
+import SortOptions from './components/SortOptions';
 import './index.scss';
 
 const ProductsCatalog = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { showToast } = useToast();
 
   const [filters, setFilters] = useState(INITIAL_FILTERS);
+  const [sortOption, setSortOption] = useState(INITIAL_SORT_OPTION);
+  const [productsLimit, setProductsLimit] = useState(PAGE_SIZE);
 
-  const { data, isLoading, isFetching } = useGetProductsQuery(filters);
+  const { data, isLoading, isFetching, error } = useGetProductsQuery({
+    filters,
+    limit: productsLimit,
+    sortOption,
+  });
 
   const { products = [], total = 0 } = data || {};
 
-  const handleLoadMore = () => {
-    setFilters((prev) => ({ ...prev, limit: prev.limit + PAGE_SIZE }));
-  };
+  useEffect(() => {
+    if (error) {
+      showToast(
+        'error',
+        error.message ?? 'Something went wrong while fetching poducts list'
+      );
+    }
+  }, [error, showToast]);
 
   return (
     <div className='catalog'>
@@ -24,6 +38,10 @@ const ProductsCatalog = () => {
         <div className='catalog__header__results'>
           <p>{total} products found</p>
         </div>
+        <SortOptions
+          sortOption={sortOption}
+          onSortChange={(option) => setSortOption(option)}
+        />
         <button onClick={() => setIsOpen(true)}>Open Filters</button>
       </header>
 
@@ -42,7 +60,7 @@ const ProductsCatalog = () => {
             products={products}
             isLoading={isLoading}
             isFetching={isFetching}
-            onLoadMore={handleLoadMore}
+            onLoadMore={() => setProductsLimit((prev) => prev + PAGE_SIZE)}
             total={total}
           />
         </main>
