@@ -1,15 +1,35 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import VirtualizedSelect from '@/shared/components/VirtualizedSelect';
 import DebouncedInput from '@/shared/components/DebouncesInput';
+import { useToast } from '@/shared/hooks/useToast';
 import { useGetBrandsQuery, useGetCategoriesQuery } from '../../productsAPI';
 import PriceRangeSlider from './PriceRangeSlider';
 import RatingFilter from './RatingFilter';
 import './index.scss';
 
 const FilterPanel = ({ filters, setFilters, isOpen, onClose }) => {
-  const { data: categoriesData = [] } = useGetCategoriesQuery();
-  const { data: brandsData = [] } = useGetBrandsQuery();
+  const { showToast } = useToast();
+  const { data: categoriesData = [], error: categoriesError } =
+    useGetCategoriesQuery();
+  const { data: brandsData = [], error: brandsError } = useGetBrandsQuery();
   const { search, categories, brands, priceRange, rating } = filters || {};
+
+  //!Also we can create funtion and call inside API calls insted of, but we don't have real API calls
+  useEffect(() => {
+    if (categoriesError) {
+      showToast(
+        'error',
+        categoriesError.message ??
+          'Something went wrong while fetching categories list'
+      );
+    }
+    if (brandsError) {
+      showToast(
+        'error',
+        brandsError.message ?? 'Something went wrong while fetching brands list'
+      );
+    }
+  }, [categoriesError, brandsError, showToast]);
 
   const handleFilterChange = useCallback(
     (key, value) => {

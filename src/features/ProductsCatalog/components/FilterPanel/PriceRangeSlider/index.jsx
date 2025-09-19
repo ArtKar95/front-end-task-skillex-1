@@ -1,10 +1,13 @@
 import { useState, useEffect, useMemo } from 'react';
 import useDebouncedCallback from '@/shared/hooks/useDebouncedCallback';
 import { useGetPriceRangeQuery } from '@/features/ProductsCatalog/productsAPI';
+import { useToast } from '@/shared/hooks/useToast';
 import './index.scss';
 
 const PriceRangeSlider = ({ defaultRange, onChange }) => {
-  const { data: priceRange = null } = useGetPriceRangeQuery();
+  const { showToast } = useToast();
+
+  const { data: priceRange = null, error } = useGetPriceRangeQuery();
   const { min, max } = priceRange || {};
 
   const [range, setRange] = useState(defaultRange || { min: 0, max: 0 });
@@ -14,6 +17,16 @@ const PriceRangeSlider = ({ defaultRange, onChange }) => {
       setRange({ min: priceRange.min, max: priceRange.max });
     }
   }, [priceRange, defaultRange]);
+
+  useEffect(() => {
+    if (error) {
+      showToast(
+        'error',
+        error.message ??
+          'Something went wrong while fetching price range data of poducts'
+      );
+    }
+  }, [error, showToast]);
 
   const debouncedOnChange = useDebouncedCallback(onChange, 300);
 

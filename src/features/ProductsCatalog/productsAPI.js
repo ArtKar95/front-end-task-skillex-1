@@ -1,18 +1,18 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import products from '@/mockData/products.json';
-import { filterProducts, simulateFetch } from './helpers';
+import { filterProducts, simulateFetch, sortProducts } from './helpers';
 
 export const productsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/' }),
   endpoints: (builder) => ({
     getProducts: builder.query({
-      queryFn: async (filters) => {
+      queryFn: async ({ filters, limit, sortOption }) => {
         const filtered = filterProducts(products, filters);
         await simulateFetch();
         return {
           data: {
-            products: filtered.slice(0, filters.limit),
+            products: sortProducts(filtered.slice(0, limit), sortOption),
             total: filtered.length,
           },
         };
