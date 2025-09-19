@@ -33,6 +33,9 @@ const ProductsCatalog = () => {
       setPreferences((prev) => ({
         ...prev,
         [key]: value,
+        ...(key === 'filters' || key === 'sortOption'
+          ? { limit: PAGE_SIZE }
+          : {}),
       }));
     },
     [setPreferences]
