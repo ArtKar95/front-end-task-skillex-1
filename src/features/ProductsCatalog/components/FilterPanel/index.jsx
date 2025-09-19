@@ -45,6 +45,7 @@ const FilterPanel = ({ filters, handleFiltersChange, isOpen, onClose }) => {
     <div
       className={`filter ${isOpen ? 'filter--open' : ''}`}
       aria-hidden={!isOpen}
+      data-testid='filter-panel-root'
     >
       <div className='filter__backdrop' onClick={onClose} />
       <aside className='filter__panel'>
