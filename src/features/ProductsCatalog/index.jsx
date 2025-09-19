@@ -1,25 +1,42 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useGetProductsQuery } from '@/features/ProductsCatalog/productsAPI';
 import { useToast } from '@/shared/hooks/useToast';
+import { useLocalStorage } from '@/shared/hooks/useLocalStorage';
 import ProductsListing from './components/ProductsListing';
 import FilterPanel from './components/FilterPanel';
 import { INITIAL_FILTERS, INITIAL_SORT_OPTION, PAGE_SIZE } from './constants';
 import SortOptions from './components/SortOptions';
 import './index.scss';
 
+const STORAGE_KEY = 'productsCatalogPreferences';
+
 const ProductsCatalog = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { showToast } = useToast();
 
-  const [filters, setFilters] = useState(INITIAL_FILTERS);
-  const [sortOption, setSortOption] = useState(INITIAL_SORT_OPTION);
-  const [productsLimit, setProductsLimit] = useState(PAGE_SIZE);
+  const [preferences, setPreferences] = useLocalStorage(STORAGE_KEY, {
+    filters: INITIAL_FILTERS,
+    sortOption: INITIAL_SORT_OPTION,
+    limit: PAGE_SIZE,
+  });
+
+  const { filters, sortOption, limit: productsLimit } = preferences;
 
   const { data, isLoading, isFetching, error } = useGetProductsQuery({
     filters,
     limit: productsLimit,
     sortOption,
   });
+
+  const handlePreferencesChange = useCallback(
+    (key, value) => {
+      setPreferences((prev) => ({
+        ...prev,
+        [key]: value,
+      }));
+    },
+    [setPreferences]
+  );
 
   const { products = [], total = 0 } = data || {};
 
@@ -40,7 +57,9 @@ const ProductsCatalog = () => {
         </div>
         <SortOptions
           sortOption={sortOption}
-          onSortChange={(option) => setSortOption(option)}
+          handleSortChange={(option) =>
+            handlePreferencesChange('sortOption', option)
+          }
         />
         <button onClick={() => setIsOpen(true)}>Open Filters</button>
       </header>
@@ -51,7 +70,9 @@ const ProductsCatalog = () => {
             isOpen={isOpen}
             onClose={() => setIsOpen(false)}
             filters={filters}
-            setFilters={setFilters}
+            handleFiltersChange={(newFilters) =>
+              handlePreferencesChange('filters', newFilters)
+            }
           />
         </aside>
 
@@ -60,7 +81,9 @@ const ProductsCatalog = () => {
             products={products}
             isLoading={isLoading}
             isFetching={isFetching}
-            onLoadMore={() => setProductsLimit((prev) => prev + PAGE_SIZE)}
+            handleLoadMore={() =>
+              handlePreferencesChange('limit', productsLimit + PAGE_SIZE)
+            }
             total={total}
           />
         </main>

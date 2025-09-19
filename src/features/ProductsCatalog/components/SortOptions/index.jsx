@@ -1,7 +1,7 @@
 import { SORT_OPTIONS } from '../../constants';
 import './index.scss';
 
-const SortOptions = ({ sortOption = 'name-asc', onSortChange }) => {
+const SortOptions = ({ sortOption = 'name-asc', handleSortChange }) => {
   return (
     <div className='sort-options'>
       <label htmlFor='sort-select' className='sort-label'>
@@ -10,7 +10,7 @@ const SortOptions = ({ sortOption = 'name-asc', onSortChange }) => {
       <select
         id='sort-select'
         value={sortOption}
-        onChange={(e) => onSortChange(e.target.value)}
+        onChange={(e) => handleSortChange(e.target.value)}
         className='sort-select'
         data-testid='sort-select'
       >
